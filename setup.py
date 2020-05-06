@@ -17,10 +17,10 @@ lib_folder = os.path.join(sys.prefix, 'lib')
 # Find opencv libraries in lib_folder
 cvlibs = list()
 for file in glob.glob(os.path.join(lib_folder, 'libopencv_*')):
-    cvlibs.append(file.split('.')[0])
+    cvlibs.append( file.split(os.path.sep)[-1].split('.')[0])
 cvlibs = list(set(cvlibs))
 cvlibs = ['-L{}'.format(lib_folder)] + \
-         ['opencv_{}'.format(lib.split(os.path.sep)[-1].split('libopencv_')[-1]) for lib in cvlibs]
+         ['opencv_{}'.format(lib.split('libopencv_')[-1]) for lib in cvlibs]
 
 conda_path = os.path.join(sys.prefix, 'include', 'opencv2')
 if os.path.exists(conda_path):
